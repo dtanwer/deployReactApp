@@ -17,11 +17,13 @@ app.get('/',(req,res)=>{
     res.send("Api is running");
 });
 
-// app.use(express.static('./my-base-pathcheck/build'));
+app.use(express.static('./my-base-pathcheck/build'));
 // app.use(basepath,require("./routes/reactRouter"));
 app.use("/api",require("./routes/apiRouter"));
 
 // if not in production use the port 5000
 const PORT = 5000;
+
+
 console.log('server started on port:',PORT);
 app.listen(PORT);
