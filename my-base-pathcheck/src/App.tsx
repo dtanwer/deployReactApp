@@ -10,7 +10,7 @@ function App() {
 
   
   return (
-    <BrowserRouter basename={basepath}>
+    <BrowserRouter>
       <QueryClientProvider client={new QueryClient()}>
         <nav>
           <h1>{name} </h1>
