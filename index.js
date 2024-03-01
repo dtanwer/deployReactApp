@@ -14,9 +14,13 @@ app.use(cors());
 
 const basepath = process.env.REACT_APP_BASEPATH;
 
-app.use(express.static('./my-base-pathcheck/build'));
-app.use('/deep',require("./routes/reactRouter"));
 app.use("/api",require("./routes/apiRouter"));
+app.use(express.static('./my-base-pathcheck/build'));
+app.use('*',(req,res)=>{
+    res.sendFile(path.resolve(__dirname, 'my-base-pathcheck', 'build', 'index.html'));
+});
+
+app.use('/deep',require("./routes/reactRouter"));
 
 // if not in production use the port 5000
 const PORT = 5000;
