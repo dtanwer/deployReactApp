@@ -2,6 +2,7 @@ const express = require('express');
 const env = require('dotenv');
 const cors = require('cors');
 const app = express();
+const path = require('path');
 env.config({
     path: './my-base-pathcheck/.env'
 });
@@ -13,13 +14,13 @@ app.use(cors());
 
 const basepath = process.env.REACT_APP_BASEPATH;
 
-app.get('/',(req,res)=>{
-    res.send("Api is running");
+app.use("/api",require("./routes/apiRouter"));
+app.use(express.static('./my-base-pathcheck/build'));
+app.use('*',(req,res)=>{
+    res.sendFile(path.resolve(__dirname, 'my-base-pathcheck', 'build', 'index.html'));
 });
 
-app.use(express.static('./my-base-pathcheck/build'));
 app.use('/deep',require("./routes/reactRouter"));
-app.use("/api",require("./routes/apiRouter"));
 
 // if not in production use the port 5000
 const PORT = 5000;
