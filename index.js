@@ -15,7 +15,7 @@ app.use(cors());
 const basepath = process.env.REACT_APP_BASEPATH;
 
 app.use("/api",require("./routes/apiRouter"));
-app.use(express.static('./my-base-pathcheck/build'));
+app.use(express.static(path.resolve(__dirname, 'my-base-pathcheck', 'build')));
 app.use('*',(req,res)=>{
     res.sendFile(path.resolve(__dirname, 'my-base-pathcheck', 'build', 'index.html'));
 });
